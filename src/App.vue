@@ -1,10 +1,12 @@
 <template>
-  <div class="main">
+  <Header />
+  <main>
     test
-  </div>
+  </main>
 </template>
+<script lang='ts' setup>
+import Header from '@/components/Header/index.vue';
+</script>
 <style lang="scss" scoped>
-.main {
-  color: red;
-}
+
 </style>
