@@ -1,0 +1,27 @@
+@keyframes slide-right {
+  from {
+    transform: translate(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-right-in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translate(0);
+  }
+}
+
+.slide-right-enter-active, .slide-right-leave-active {
+  animation: slide-right-in 0.2s ease-in-out forwards;
+}
+
+.slide-right-enter, .slide-right-leave-active {
+  animation: slide-right 0.2s ease-in-out forwards;
+}

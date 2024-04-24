@@ -26,6 +26,7 @@ module.exports = {
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/type-annotation-spacing': 'error',
     '@typescript-eslint/space-infix-ops': 'error',
+    'vue/require-explicit-emits': 'off',
     'space-infix-ops': 'off',
     'no-shadow': 'off',
     'no-unused-vars': 'off',
