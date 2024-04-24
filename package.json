@@ -5,7 +5,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue}": [
+      "eslint --fix",
+      "git add ."
+    ],
+    "*.{scss,vue}": [
+      "stylelint --fix",
+      "git add ."
+    ]
   },
   "dependencies": {
     "vue": "3.4.21"
