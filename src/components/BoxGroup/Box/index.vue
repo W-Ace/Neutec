@@ -2,12 +2,8 @@
   <div class="box">
     <div
       class="box-inner"
-    >
-      <div
-        v-if="props.isFlash"
-        class="box-inner-flash"
-      />
-    </div>
+      :class="props.isFlash && 'box-inner--flash'"
+    />
   </div>
 </template>
 <script lang="ts" setup>
@@ -31,21 +27,18 @@ const props = withDefaults(defineProps<Props>(), {
   background: radial-gradient(circle, rgba(113, 81, 95, 1) 81%, rgba(0, 0, 0, 1) 100%);
 }
 
-.box-inner-flash {
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  animation: flash 0.5s ease-in-out infinite;
+.box-inner--flash {
+  animation: flash 0.6s ease-in-out alternate infinite;
   will-change: opacity;
 }
 
 @keyframes flash {
   from {
-    opacity: 0;
+    opacity: 1;
   }
 
   to {
-    opacity: 0.2;
+    opacity: 0.6;
   }
 }
 </style>
