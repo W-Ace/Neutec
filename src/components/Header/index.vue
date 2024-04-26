@@ -6,8 +6,8 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
-import Hambuger from '@/components/Header/Hamburger/index.vue';
-import Sidebar from '@/components/Header/Sidebar/index.vue';
+import Hambuger from '@/components/Hamburger/index.vue';
+import Sidebar from '@/components/Sidebar/index.vue';
 
 const showSidebar = ref(false);
 

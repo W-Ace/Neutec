@@ -6,7 +6,9 @@
       v-show="props.showSidebar"
       class="sidebar"
     >
-      1
+      <Menu
+        :menu-list="drinks"
+      />
     </aside>
   </transition>
   <div
@@ -16,6 +18,9 @@
   />
 </template>
 <script lang="ts" setup>
+import { ref } from 'vue';
+import Menu from '@/components/Menu/index.vue';
+import mockDrinkData from '@/assets/data/drink';
 
 type Props = {
   showSidebar: boolean
@@ -28,6 +33,8 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
   'update:showSidebar': [isShowSidebar: boolean]
 }>();
+
+const drinks = ref(mockDrinkData);
 
 const closeSidebar = () => {
   emit('update:showSidebar', false);
@@ -44,7 +51,9 @@ const closeSidebar = () => {
   right: 0;
   bottom: 0;
   z-index: $z-index-sidebar;
-  width: 190px;
+  width: 220px;
+  padding: 10px;
+  overflow: auto;
   background: #333;
 }
 
