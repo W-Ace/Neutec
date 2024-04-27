@@ -2,6 +2,7 @@
   <div class="box-group">
     <Box
       v-for="(i) in boxAmount"
+      :data-pos="i"
       :key="i"
       :is-flash="isFlashEnabled(i)"
     />
