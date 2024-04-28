@@ -90,8 +90,10 @@ const persistKey = (menuKey: string, isClose: boolean) => {
     const isTheSameGroup = () => parentIndex >= 0;
 
     if (isTheSameGroup()) {
-      keyPath = selectedMenuKey;
-      keyPath[parentIndex + 1] = menuKey;
+      const thisIndex = parentIndex + 1;
+
+      keyPath = selectedMenuKey.slice(0, thisIndex);
+      keyPath[thisIndex] = menuKey;
     }
   } else {
     keyPath.push(menuKey);
@@ -120,7 +122,6 @@ const highlightByStoreKey = () => {
   const selectedMenuKey = getStoredKey();
 
   activeKey.value = selectedMenuKey[props.level];
-  console.log('high');
 };
 
 const nestedHighlightByStoreKey = async () => {
