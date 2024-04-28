@@ -18,6 +18,9 @@
 import { ref, onBeforeMount, defineEmits } from 'vue';
 import type { MenuItem } from '@/assets/data/drink';
 import mockDrinkData from '@/assets/data/drink';
+import { useStorage } from '@/hook/useStorage';
+
+const { getLocalStorage, setLocalStorage } = useStorage();
 
 type MenuOption = MenuItem & {
   keyPath?: Array<MenuItem['key']>
@@ -53,7 +56,7 @@ const select = (event: Event) => {
   const selectedOption = selectElement.selectedOptions[0];
   const keyPathArray = selectedOption?.dataset?.keyPath?.split(',') || [];
 
-  localStorage.setItem('selectedMenuKey', JSON.stringify(keyPathArray));
+  setLocalStorage('selectedMenuKey', keyPathArray);
 
   emit('select');
 };
@@ -63,7 +66,7 @@ const setMenuOptions = () => {
 };
 
 const setDefaultSelectedMenu = () => {
-  const storedMenuKey = JSON.parse(localStorage.getItem('selectedMenuKey') || '[]');
+  const storedMenuKey = getLocalStorage('selectedMenuKey', []);
 
   if (Array.isArray(storedMenuKey) && storedMenuKey.length > 0) {
     selectedMenu.value = storedMenuKey[storedMenuKey.length - 1];

@@ -40,6 +40,9 @@ import type { MenuItem } from '@/assets/data/drink';
 import SelectMenu from '@/components/Menu/SelectMenu/index.vue';
 import Menu from '@/components/Menu/index.vue';
 import SvgIcon from '@/components/SvgIcon/index.vue';
+import { useStorage } from '@/hook/useStorage';
+
+const { getLocalStorage, setLocalStorage } = useStorage();
 
 type MenuInstance = InstanceType<typeof Menu>
 
@@ -58,13 +61,13 @@ const props = withDefaults(defineProps<Props>(), {
 const activeKey = ref('');
 const subMenu = ref<MenuInstance[]>();
 
-const getStoredKey = (): string[] => JSON.parse(localStorage.getItem('selectedMenuKey') || '[]');
+const getStoredKey = (): string[] => getLocalStorage('selectedMenuKey', []);
 
 const persistKey = (menuKey: string, isClose: boolean) => {
   const selectedMenuKey = getStoredKey();
 
   const storeMenuKey = (storeKeyPath: string[]) => {
-    localStorage.setItem('selectedMenuKey', JSON.stringify(storeKeyPath));
+    setLocalStorage('selectedMenuKey', storeKeyPath);
   };
 
   if (isClose) {
