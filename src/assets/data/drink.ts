@@ -1,4 +1,10 @@
-export default [
+export type MenuItem = {
+  key: string
+  text: string
+  children?: Array<MenuItem>
+}
+
+const menuData: MenuItem[] = [
   {
     key: '64f',
     text: '好喝黑糖',
@@ -82,3 +88,5 @@ export default [
     }],
   },
 ];
+
+export default menuData;

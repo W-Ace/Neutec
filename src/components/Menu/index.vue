@@ -1,4 +1,8 @@
 <template>
+  <SelectMenu
+    v-if="props.level === 0"
+    @select="selectMenu"
+  />
   <ul class="menu">
     <li
       class="menu-item"
@@ -22,6 +26,7 @@
       </div>
       <Menu
         v-if="menuItem.children && isCurrentKey(menuItem?.key)"
+        ref="subMenu"
         :parent-key="menuItem.key"
         :menu-list="menuItem.children"
         :level="props.level + 1"
@@ -30,15 +35,13 @@
   </ul>
 </template>
 <script lang="ts" setup>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref, nextTick } from 'vue';
+import type { MenuItem } from '@/assets/data/drink';
+import SelectMenu from '@/components/Menu/SelectMenu/index.vue';
 import Menu from '@/components/Menu/index.vue';
 import SvgIcon from '@/components/SvgIcon/index.vue';
 
-type MenuItem = {
-  key: string
-  text: string
-  children?: Array<MenuItem>
-}
+type MenuInstance = InstanceType<typeof Menu>
 
 type Props = {
   parentKey?: MenuItem['key']
@@ -53,6 +56,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const activeKey = ref('');
+const subMenu = ref<MenuInstance[]>();
 
 const getStoredKey = (): string[] => JSON.parse(localStorage.getItem('selectedMenuKey') || '[]');
 
@@ -116,7 +120,26 @@ const highlightByStoreKey = () => {
   const selectedMenuKey = getStoredKey();
 
   activeKey.value = selectedMenuKey[props.level];
+  console.log('high');
 };
+
+const nestedHighlightByStoreKey = async () => {
+  highlightByStoreKey();
+
+  await nextTick();
+
+  if (Array.isArray(subMenu.value)) {
+    subMenu.value?.[0].nestedHighlightByStoreKey();
+  }
+};
+
+const selectMenu = () => {
+  nestedHighlightByStoreKey();
+};
+
+defineExpose({
+  nestedHighlightByStoreKey,
+});
 
 onBeforeMount(() => {
   highlightByStoreKey();
