@@ -1,7 +1,7 @@
 export const useStorage = () => {
   const getLocalStorage = (key: string, defaultValue: any) => {
     try {
-      const parsedLocalStorage = JSON.parse(localStorage.getItem(key) || '') || defaultValue;
+      const parsedLocalStorage = JSON.parse(localStorage.getItem(key) || '{}') || defaultValue;
       return parsedLocalStorage;
     } catch (error) {
       console.error(error);
