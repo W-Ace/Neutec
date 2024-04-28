@@ -7,7 +7,10 @@
       :value="BallAnimationModeEnum.TRANSLATE_RIGHT"
       v-model="ballAnimationMode"
     >
-    <label for="ballAnimationMode1">向右移動</label>
+    <label
+      class="animation-radio-label"
+      for="ballAnimationMode1"
+    >向右移動</label>
 
     <input
       type="radio"
@@ -16,16 +19,22 @@
       :value="BallAnimationModeEnum.MOVE_TO_ONE_POINT"
       v-model="ballAnimationMode"
     >
-    <label for="ballAnimationMode2">4顆球某點</label>
+    <label
+      class="animation-radio-label"
+      for="ballAnimationMode2"
+    >4顆球某點</label>
 
-    <!-- <input
+    <input
       type="radio"
       id="ballAnimationMode3"
       name="ballAnimationMode"
       :value="BallAnimationModeEnum.HUNDRED_BALL_MOVE_TO_ONE_POINT"
       v-model="ballAnimationMode"
     >
-    <label for="ballAnimationMode3">100顆球朝某點</label> -->
+    <label
+      class="animation-radio-label"
+      for="ballAnimationMode3"
+    >100顆球朝某點</label>
   </div>
 </template>
 <script lang="ts" setup>
@@ -45,5 +54,9 @@ watch(() => ballAnimationMode.value, (newMode) => {
 <style lang="scss" scope>
 .animation-radio {
   font-size: 14px;
+}
+
+.animation-radio-label {
+  margin-right: 5px;
 }
 </style>

@@ -1,12 +1,15 @@
 <template>
   <div class="ball-container">
-    <Ball
-      v-for="(pos) in ballPositionOfBox"
-      :position="pos"
-      :animation-mode="props.animationMode"
-      :data-pos="pos"
-      :key="pos"
-    />
+    <BallAnimation v-if="animationMode === BallAnimationModeEnum.HUNDRED_BALL_MOVE_TO_ONE_POINT" />
+    <template v-else>
+      <Ball
+        v-for="(pos) in ballPositionOfBox"
+        :position="pos"
+        :animation-mode="props.animationMode"
+        :data-pos="pos"
+        :key="pos"
+      />
+    </template>
   </div>
 </template>
 <script lang="ts" setup>
@@ -14,6 +17,7 @@ import {
   ref, watch, nextTick,
 } from 'vue';
 import Ball from '@/components/BallContainer/Ball/index.vue';
+import BallAnimation from '@/components/BallContainer/BallAnimation/index.vue';
 import { BallAnimationModeEnum } from '@/assets/enum/ballAnimationModeEnum';
 
 type Props = {
