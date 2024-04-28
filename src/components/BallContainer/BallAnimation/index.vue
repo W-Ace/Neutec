@@ -25,13 +25,14 @@ const canvas = ref<HTMLCanvasElement | null>(null);
 const ballAnimation = ref<HTMLDivElement | null>(null);
 const balls = ref<Ball[]>([]);
 const ballCount = 100;
+const ballDiameter = 30;
 const target = { x: 0, y: 0 };
 
 const createBall = (containerWidth: number, containerHeight: number) => ({
   x: Math.random() * containerWidth,
   y: Math.random() * containerHeight,
-  width: 30,
-  height: 30,
+  width: ballDiameter,
+  height: ballDiameter,
   radius: 15,
 });
 
@@ -85,8 +86,8 @@ onMounted(() => {
   canvasEl.width = ballAnimationWidth;
   canvasEl.height = ballAnimationHeight;
 
-  target.x = ballAnimationWidth / 2;
-  target.y = ballAnimationHeight / 2;
+  target.x = Math.floor(Math.random() * ballAnimationWidth) - (ballDiameter / 2);
+  target.y = Math.floor(Math.random() * ballAnimationHeight) - (ballDiameter / 2);
 
   balls.value = Array.from({ length: ballCount }, () => createBall(ballAnimationWidth, ballAnimationHeight));
 
